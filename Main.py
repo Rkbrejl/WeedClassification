@@ -10,6 +10,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import random
 
+#This is the comment made by Benjamin
+
 (x_train, y_train), (x_test, y_test) = cifar100.load_data()
 
 def prepare_input_data(X_train, X_test):
