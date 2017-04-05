@@ -1,5 +1,5 @@
 from keras.models import Sequential, Model
-from keras.applications import ResNet50
+from keras.applications import ResNet50, VGG16
 from keras.layers import Conv2D, Dense, MaxPooling2D, Flatten, GlobalAveragePooling2D
 from keras.optimizers import Adam
 from keras.losses import categorical_crossentropy
@@ -27,7 +27,7 @@ def prepare_output_data(y_train, y_test):
 x_train, x_test = prepare_input_data(x_train, x_test)
 y_train, y_test = prepare_output_data(y_train, y_test)
 
-base_model = ResNet50(input_shape=(None, None, 3), weights='imagenet', include_top=False)
+base_model = VGG16(input_shape=(None, None, 3), weights='imagenet', include_top=False)
 for layer in base_model.layers:
     layer.trainable = False
 
