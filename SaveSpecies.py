@@ -7,17 +7,28 @@ import os.path
 
 path = 'Plants/train_xml/'
 highest_id = 36310
-plant_species = []
-my_file = open('train_species.txt', 'w')
+natural_plant_species = []
+sheet_plant_species = []
+natural_file = open('natural_train_species.txt', 'w')
+sheet_file = open('sheet_train_species.txt', 'w')
 for i in trange(highest_id+1, leave=False):
     this_path = path+str(i)+'.xml'
     if os.path.isfile(this_path):
         tree = ET.parse(this_path)
         root = tree.getroot()
         spec = root.find('ClassId').text
-        plant_species.append(spec)
-        my_file.write('%s\n' % spec)
+        type = root.find('Type').text
+        if type == 'NaturalBackground':
+            natural_plant_species.append(spec)
+            natural_file.write('%s\n' % spec)
+            natural_file.write('%d\n' % i)
+        else:
+            sheet_plant_species.append(spec)
+            sheet_file.write('%s\n' % spec)
+            sheet_file.write('%d\n' % i)
 
-my_file.close()
+natural_file.close()
+sheet_file.close()
 
-print(len(plant_species))
+print(len(natural_plant_species))
+print(len(sheet_plant_species))
